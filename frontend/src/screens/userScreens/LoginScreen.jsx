@@ -2,44 +2,44 @@ import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { BsEmojiLaughing } from "react-icons/bs";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-// import { useDispatch, useSelector } from "react-redux";
-// import { useLoginMutation } from "../../redux/userApiSlice";
-// import { userCredentials } from "../../redux/authSlice";
-// import { toast } from "react-toastify";
+import { useDispatch, useSelector } from "react-redux";
+import { useLoginMutation } from "../../redux/userApiSlice";
+import { userCredentials } from "../../redux/authSlice";
+import { toast } from "react-toastify";
 
 const LoginScreen = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  //   const dispatch = useDispatch();
-  //   const [login, { isLoading, error }] = useLoginMutation();
-  //   const { userInfo } = useSelector((state) => state.auth);
+  const dispatch = useDispatch();
+  const [login, { isLoading, error }] = useLoginMutation();
+  const { userInfo } = useSelector((state) => state.auth);
 
-  //   const { search } = useLocation();
-  //   const sp = new URLSearchParams(search);
+  const { search } = useLocation();
+  const sp = new URLSearchParams(search);
 
-  //   const redirect = sp.get("/redirect") || "/dashboard";
+  const redirect = sp.get("/redirect") || "/dashboard";
 
-  //   const navigate = useNavigate();
+  const navigate = useNavigate();
 
-  //   useEffect(() => {
-  //     if (userInfo) {
-  //       navigate("/dashboard");
-  //     }
-  //   }, []);
+  useEffect(() => {
+    if (userInfo) {
+      navigate("/dashboard");
+    }
+  }, []);
 
-  //   const submitHandler = async (e) => {
-  //     try {
-  //       e.preventDefault();
-  //       const res = await login({ email, password }).unwrap();
+  const submitHandler = async (e) => {
+    try {
+      e.preventDefault();
+      const res = await login({ email, password }).unwrap();
 
-  //       dispatch(userCredentials({ ...res }));
-  //       toast.success("login Succesfully");
-  //       navigate(redirect);
-  //     } catch (err) {
-  //       toast.error(err?.data?.message || err.error);
-  //     }
-  //   };
+      dispatch(userCredentials({ ...res }));
+      toast.success("login Succesfully");
+      navigate(redirect);
+    } catch (err) {
+      toast.error(err?.data?.message || err.error);
+    }
+  };
 
   return (
     <motion.div
@@ -53,7 +53,7 @@ const LoginScreen = () => {
 
       <form
         className="max-w-md mx-auto bg-white p-8  rounded shadow-lg"
-        // onSubmit={submitHandler}
+        onSubmit={submitHandler}
       >
         <h1 className="text-center text-2xl font-bold">Sign In </h1>
 

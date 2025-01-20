@@ -3,6 +3,7 @@ import express from "express";
 import dotenv from "dotenv";
 import mongoose from "mongoose"; // Import mongoose here
 import { db } from "./db/db.js";
+import cors from "cors";
 import userRoutes from "./routes/userRoutes.js";
 
 const port = process.env.PORT || 5000;
@@ -33,6 +34,11 @@ const app = express();
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+
+// Enable CORS for requests only from http://localhost:5173
+app.use(cors({
+  origin: 'http://localhost:5173', // Allow only this origin
+}));
 
 // Define a route for the root URL
 app.get("/", (req, res) => {
