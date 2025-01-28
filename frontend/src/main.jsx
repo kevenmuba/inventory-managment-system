@@ -13,10 +13,12 @@ const rootElement = document.getElementById("root"); // Get the root element
 const root = ReactDOM.createRoot(rootElement); // Create a root
 
 root.render(
-  <Provider store={store}>
-    <Router>
-      <App />
-    </Router>
+  <>
+    <Provider store={store}>
+      <Router>
+        <App />
+      </Router>
+    </Provider>
     <ToastContainer />
-  </Provider>
+  </>
 );

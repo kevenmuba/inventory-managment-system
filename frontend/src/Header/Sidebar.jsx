@@ -15,10 +15,13 @@ import {
   FaUsers,
 } from "react-icons/fa";
 import { Link } from "react-router-dom";
-// import { useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 function Sidebar({ openSidebarToggle, openSidebar }) {
   const [isInventoryOpen, setIsInventoryOpen] = useState(true);
   const [isProcurmentOpen, setIsProcurmentOpen] = useState(false);
+
+  const { cartItems } = useSelector((state) => state.cart);
+  const totalQty = cartItems?.reduce((acc, item) => acc + Number(item.qty), 0);
 
   const toggleInventory = () => {
     /*************  ✨ Codeium Command ⭐  *************/
@@ -48,9 +51,11 @@ function Sidebar({ openSidebarToggle, openSidebar }) {
       </div>
       <ul className="sidebar-list">
         <li className="sidebar-list-item ">
-          <span className="flex items-center space-x-2">
-            <BsGrid1X2Fill className="icon" /> Dashboard
-          </span>
+          <Link to="/dashboard">
+            <span className="flex items-center space-x-2">
+              <BsGrid1X2Fill className="icon" /> Dashboard
+            </span>
+          </Link>
         </li>
         <li className="sidebar-list-item">
           <div
@@ -86,7 +91,7 @@ function Sidebar({ openSidebarToggle, openSidebar }) {
                 >
                   <BsCart4 className="icon" /> CART
                   <span className="badge text-orange-700 mt-[-20px]">
-                    {/* {totalQty} */}5
+                    {totalQty}
                   </span>
                 </Link>
               </li>
