@@ -1,18 +1,18 @@
 import React, { useEffect } from "react";
 import { BsJustify } from "react-icons/bs";
 import { BiLogOut } from "react-icons/bi";
-// import { useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-// import { logoutHandler } from "../redux/authSlice";
+import { logoutHandler } from "../redux/authSlice";
 const Header = ({ openSidebar }) => {
-  //   const dispatch = useDispatch();
+  const dispatch = useDispatch();
 
   const navigate = useNavigate();
 
-  // const logout = () => {
-  //   dispatch(logoutHandler());
-  //   navigate("/login");
-  // };
+  const logout = () => {
+    dispatch(logoutHandler());
+    navigate("/login");
+  };
 
   return (
     <header className="header">
@@ -27,7 +27,7 @@ const Header = ({ openSidebar }) => {
       </div>
       <div className="header-right flex items-center space-x-2">
         <p className="hidden md:block">User name</p>
-        <button className="flex items-center space-x-1">
+        <button className="flex items-center space-x-1" onClick={logout}>
           <BiLogOut size={28} /> Logout
         </button>
       </div>

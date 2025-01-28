@@ -5,6 +5,8 @@ import mongoose from "mongoose"; // Import mongoose here
 import { db } from "./db/db.js";
 import cors from "cors";
 import userRoutes from "./routes/userRoutes.js";
+import productRoutes from "./routes/productRoutes.js";
+import cookieParser from "cookie-parser";
 
 const port = process.env.PORT || 5000;
 
@@ -34,11 +36,15 @@ const app = express();
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(cookieParser());
 
 // Enable CORS for requests only from http://localhost:5173
-app.use(cors({
-  origin: 'http://localhost:5173', // Allow only this origin
-}));
+app.use(
+  cors({
+    origin: "http://localhost:5173",
+    //  // Allow only this origin
+  })
+);
 
 // Define a route for the root URL
 app.get("/", (req, res) => {
@@ -50,6 +56,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 app.use("/api/users", userRoutes);
+app.use("/api/products", productRoutes);
 
 // Set the server to listen on port 5000
 app.listen(port, () => {

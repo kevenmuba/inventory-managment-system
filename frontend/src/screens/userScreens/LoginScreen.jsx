@@ -24,7 +24,7 @@ const LoginScreen = () => {
 
   useEffect(() => {
     if (userInfo) {
-      navigate("/dashboard");
+      navigate("/");
     }
   }, []);
 

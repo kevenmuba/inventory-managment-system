@@ -5,6 +5,9 @@ import Dashboard from "./screens/Dashboard.jsx";
 import Layout from "./Layout/Layout.jsx";
 import RegisterScreen from "./screens/userScreens/RegisterScreen.jsx";
 import LoginScreen from "./screens/userScreens/LoginScreen.jsx";
+import Warehouse from "./screens/productScreens/Warehouse.jsx";
+import AuthUser from "./components/AuthUser.jsx";
+import ProductDetails from "./screens/productScreens/ProductDetails.jsx";
 
 export default function App() {
   return (
@@ -15,11 +18,35 @@ export default function App() {
         path="/dashboard"
         exact
         element={
-          // <AuthUser>
-          <Layout>
-            <Dashboard />
-          </Layout>
-          // </AuthUser>
+          <AuthUser>
+            <Layout>
+              <Dashboard />
+            </Layout>
+          </AuthUser>
+        }
+      />
+
+      <Route
+        path="/warehouse"
+        exact
+        element={
+          <AuthUser>
+            <Layout>
+              <Warehouse />
+            </Layout>
+          </AuthUser>
+        }
+      />
+
+      <Route
+        path="/product/:id"
+        exact
+        element={
+          <AuthUser>
+            <Layout>
+              <ProductDetails />
+            </Layout>
+          </AuthUser>
         }
       />
       <Route path="/register" element={<RegisterScreen />} />
